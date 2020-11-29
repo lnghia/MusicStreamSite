@@ -1,1 +1,1 @@
-web: gunicorn WorkTime.wsgi --log-file -
+web: gunicorn MusicStreamSite.wsgi --log-file -
