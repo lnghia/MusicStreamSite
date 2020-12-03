@@ -16,6 +16,7 @@ def register_user(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
+            user.username = user.email
             user.set_password(password1)
             form.save()
             return JsonResponse({"status": True, "message": "Registration confirm"})
@@ -34,7 +35,7 @@ def login_user(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         data = {'email': email, 'password': password}
-        user = authenticate(email=email, password=password)
+        user = authenticate(username=email, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
