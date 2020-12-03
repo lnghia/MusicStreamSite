@@ -132,4 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = "accounts.user"
 
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True

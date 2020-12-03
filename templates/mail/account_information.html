@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+    <h1>Welcome to Music-Stream-Site !</h1>
+</head>
+
+<body>
+    <p>Hey {{ new_user.name }}!</p>
+    <p>Thank you for trusting and supporting out service !</p>
+    <p>This is to verify your email and confirm your account</p>
+    <p>Please <a href="{{confirmation_link}}">click here</a> to confirm your account</p>
+    <p>Alternatively, you can paste the following link in your browser's address bar:</p>
+    {{confirmation_link}}
+    <br>
+    <p>Sincerely,</p>
+    <p>The Music-Stream-Site Team</p>
+</body>
