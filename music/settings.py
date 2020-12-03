@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '#=vy*swx+%5ri)kij&&c!4y(@m_16nhq(k3l+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'musicstreamsite.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'heroku-music-site.herokuapp.com']
 
 # Application definition
 
