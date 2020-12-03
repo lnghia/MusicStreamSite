@@ -1,2 +1,1 @@
-web: gunicorn MusicStreamSite.wsgi --log-file -
-python manage.py collectstatic
+web: gunicorn music.wsgi --log-file -
