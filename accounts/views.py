@@ -7,6 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import RegistrationForm
+
 from utils.Email_Util import send_email
 
 def register_user(request):
