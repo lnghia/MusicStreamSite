@@ -8,7 +8,7 @@ from django.urls import reverse
 
 from .forms import RegistrationForm
 
-
+# from ..utils.email.email_util import send_email
 from utils.Email_Util import send_email
 
 def register_user(request):
