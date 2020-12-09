@@ -19,6 +19,6 @@ class RegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
         if commit:
-            user.is_active = True
+            user.is_active = False
             user.save()
         return user

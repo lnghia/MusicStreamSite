@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from itsdangerous import Serializer, TimedJSONWebSignatureSerializer as TokenSerializer
+from django.conf import settings
+
 
 class User(AbstractUser):
     name = models.CharField(max_length=100)
@@ -16,3 +19,23 @@ class User(AbstractUser):
 
     def __unicode__(self):
         return self.email
+
+    def generate_confirmation_token(self, expire=3600):
+        serializer = TokenSerializer(settings.SECRET_KEY, expires_in=expire)
+        return serializer.dumps({'id': self.id})
+
+    def verify_confirmation_token(self, token):
+        serializer = TokenSerializer(settings.SECRET_KEY)
+
+        try:
+            data = serializer.loads(token)
+        except:
+            return False
+
+        if data.get('id') and data.get('id') == self.id:
+            self.is_active = True
+            self.save()
+
+            return True
+
+        return False

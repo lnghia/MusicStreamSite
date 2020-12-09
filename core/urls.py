@@ -1,3 +1,5 @@
+from os import name
+from accounts.views import account_confirmation, confirm_account
 from django.urls import path, include
 from .views import *
 from django.conf import settings
