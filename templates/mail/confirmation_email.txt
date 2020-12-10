@@ -1,0 +1,7 @@
+Welcome !!!
+
+Please confirm your email address by clicking on the link below to get started:
+
+{{ url }}
+
+Have a good day !
