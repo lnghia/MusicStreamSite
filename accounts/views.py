@@ -64,13 +64,15 @@ def resend_confirmation_email(request):
 
     token = request.user.generate_confirmation_token()
     email = request.user.email
+    url = request.build_absolute_uri(reverse('accounts:confirm', args=[token]))
 
-    send_email('Account Confirmation', email, {}, 'mail/confirmation_email')
+    send_email('Account Confirmation', email, {'url': url}, 'mail/confirmation_email')
 
-    return redirect('unconfirmed-account')
+    return redirect('accounts:unconfirmed-account')
 
 @login_required
 def account_confirmation(request):
+    # print(1)
     if not request.user.is_anonymous and not request.user.is_active:
         return render(request, 'account/unconfirmed.html', {'email': request.user.email})
 
@@ -78,8 +80,16 @@ def account_confirmation(request):
 
 @login_required
 def confirm_account(request, token):
+    token = token.split("'")[1]
     if not request.user.is_active:
         if request.user.verify_confirmation_token(token):
             request.user.is_active = True
             request.user.save()
+            return redirect('core:home')
+        return redirect('accounts:confirmation-link-expired')
     return redirect('core:home')
+
+@login_required
+def confirmation_link_expired(request):
+    url = request.build_absolute_uri(reverse('accounts:resend-confirmation-email'))
+    return render(request, 'account/confirmation_link_expired.html', {'url': url})
